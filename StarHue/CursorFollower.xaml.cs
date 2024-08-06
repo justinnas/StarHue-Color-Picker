@@ -15,11 +15,12 @@ namespace StarHue
             this.Cursor = System.Windows.Input.Cursors.Cross;
         }
 
-
         public void SetPosition(System.Drawing.Point position)
         {
-            Left = position.X - 100;
-            Top = position.Y - 100;
+            var transform = PresentationSource.FromVisual(this).CompositionTarget.TransformFromDevice;
+            var mouse = transform.Transform(new System.Windows.Point(position.X, position.Y));
+            Left = mouse.X - ActualWidth / 2;
+            Top = mouse.Y - ActualHeight / 2;
         }
 
         public void SetMiniColorDisplay(SolidColorBrush colorBrush)
