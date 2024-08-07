@@ -15,7 +15,7 @@
 
 ## **Download**
 
-You can download the latest version of StarHue from [GitHub Releases]() (soon). Scroll down to 'Assets' section and choose between the installer or the portable version based on your preference.
+You can download the latest version of StarHue from [GitHub Releases](https://github.com/justinnas/StarHue-Color-Picker/releases/). Scroll down to 'Assets' section and choose between the installer or the portable version based on your preference.
 
 <br>
 
@@ -28,6 +28,7 @@ You can download the latest version of StarHue from [GitHub Releases]() (soon).
 <br>
 
 ## How to Use
+If you allow the installer to create a Start Menu folder during installation, you can easily launch the app by typing 'StarHue', 'Color Picker', or 'ColorPicker' in the Windows search bar.
 
 ### How to Pick a Color:
 1. Click the “Pick a color” button.
@@ -53,6 +54,8 @@ You can download the latest version of StarHue from [GitHub Releases]() (soon).
 
 *The last thing that was copied will also be displayed at the bottom of the application window.*
 
+*You can also run multiple instances of this program to have more colors picked at the same time.*
+
 <br>
 
 ## **Source Code**
@@ -63,6 +66,6 @@ If you prefer, you can review the source code and compile the application yourse
 
 ## License
 
-This project uses System.Drawing (MIT License) library. License file could be found [here]() (soon).
+This project uses System.Drawing (MIT License) library. License file could be found [here](https://github.com/justinnas/StarHue-Color-Picker/tree/main/Licenses).
 
 StarHue is licensed under GNU General Public License v3.0 license, please see the [license file](https://github.com/justinnas/StarHue-Color-Picker/blob/main/LICENSE.txt) for more details.
