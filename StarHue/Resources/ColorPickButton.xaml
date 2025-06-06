@@ -7,7 +7,7 @@
                     <Grid>
                         <Rectangle Fill="{TemplateBinding Background}"
                                    RadiusX="10" RadiusY="10"
-                                   Stroke="{TemplateBinding Foreground}"
+                                   Stroke="{TemplateBinding BorderBrush}"
                                    StrokeThickness="{TemplateBinding BorderThickness}" />
 
                         <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -32,8 +32,8 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderBrush" Value="White"/>
+        <Setter Property="Background" Value="#FF2D2D2D"/>
+        <Setter Property="BorderBrush" Value="#FF424242"/>
         <Setter Property="Foreground" Value="#ffffff"/>
         <Setter Property="BorderThickness" Value="3"/>
         <Setter Property="Padding" Value="10"/>
@@ -41,7 +41,7 @@
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Cursor" Value="Hand"/>
-                <Setter Property="Foreground" Value="#b4b4b4"/>
+                <Setter Property="Background" Value="#FF323232"/>
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Foreground" Value="#7f7f7f"/>

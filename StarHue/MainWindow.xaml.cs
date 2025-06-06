@@ -9,22 +9,26 @@ using Point = System.Drawing.Point;
 using Size = System.Drawing.Size;
 using System.Windows.Documents;
 using System.Drawing;
-using System.Windows.Forms;
-
+using System.Collections.Generic;
+using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
 
 namespace StarHue
 {
     public partial class MainWindow : Window
     {
-        private const string appName = "StarHue";
-        private const string appVersion = "1.0";
-        private const string appDeveloper = "justinnas";
+        public const string appName = "StarHue";
+        public const string appVersion = "2.0pre1";
+        public const string appDeveloper = "justinnas";
 
         private DispatcherTimer CursorTrackTimer;
         private CursorFollower CursorFollower;
 
         private byte?[] RGBValues = new byte?[3];
         private string HEXValue = "";
+
+        public Dictionary<string, string> colors = new Dictionary<string, string>();
+        private bool isColorSaved = false;
+        private string savedColorFilePath = "";
 
         public MainWindow()
         {
@@ -33,7 +37,6 @@ namespace StarHue
             this.Deactivated += Window_Deactivated;
 
             SetInfoMessage();
-
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -62,6 +65,7 @@ namespace StarHue
             }
         }
 
+
         private void StartTrackingMouse()
         {
             CursorTrackTimer = new DispatcherTimer
@@ -82,7 +86,7 @@ namespace StarHue
         {
             Point position = Control.MousePosition;
 
-            this.Cursor = System.Windows.Input.Cursors.Cross;
+            this.Cursor = Cursors.Cross;
 
             Color color = GetColor(position);
 
@@ -91,22 +95,24 @@ namespace StarHue
             CursorFollower.SetPosition(position);
             CursorFollower.SetMiniColorDisplay(colorBrush);
 
-            if (Control.MouseButtons.HasFlag(MouseButtons.Left))
+            if (Control.MouseButtons.HasFlag(System.Windows.Forms.MouseButtons.Left))
             {
                 PickColorButton.IsEnabled = true;
                 CursorFollower.Close();
                 CursorTrackTimer.Stop();
-                this.Cursor = System.Windows.Input.Cursors.Arrow;
+                this.Cursor = Cursors.Arrow;
+                SaveColorContextMenuButton.Header = "Save color";
+                OpenSavedColorContextMenuButton.Visibility = Visibility.Collapsed;
                 ColorSelected(position);
             }
 
-            if (Control.MouseButtons.HasFlag(MouseButtons.Right) || Keyboard.IsKeyDown(Key.Escape))
+            if (Control.MouseButtons.HasFlag(System.Windows.Forms.MouseButtons.Right) || Keyboard.IsKeyDown(Key.Escape))
             {
                 PickColorButton.IsEnabled = true;
                 CursorFollower.Close();
                 CursorTrackTimer.Stop();
                 SetInfoMessage();
-                this.Cursor = System.Windows.Input.Cursors.Arrow;
+                this.Cursor = Cursors.Arrow;
             }
         }
 
@@ -122,7 +128,7 @@ namespace StarHue
 
             var colorBrush = new SolidColorBrush(System.Windows.Media.Color.FromArgb(color.A, color.R, color.G, color.B));
 
-            ColorDisplay.Fill = colorBrush;
+            ColorDisplay.Background = colorBrush;
 
             RGBValues[0] = color.R;
             RGBValues[1] = color.G;
@@ -134,7 +140,9 @@ namespace StarHue
             UpdateHEXText(HEXValue);
 
             SetInfoMessage();
+            this.Title = $"StarHue - #{HEXValue}";
         }
+
 
         public void UpdateRGBText(byte r, byte g, byte b)
         {
@@ -163,11 +171,16 @@ namespace StarHue
             this.Close();
         }
 
+        private void MinimizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
         private void CopyHEXButton_Click(object sender, RoutedEventArgs e)
         {
             if (HEXValue != "")
             {
-                System.Windows.Clipboard.SetText($"#{HEXValue}");
+                Clipboard.SetText($"#{HEXValue}");
 
                 SetInfoMessage("copy", $"#{HEXValue}");
             }
@@ -181,7 +194,7 @@ namespace StarHue
         {
             if (RGBValues[0].HasValue && RGBValues[1].HasValue && RGBValues[2].HasValue)
             {
-                System.Windows.Clipboard.SetText($"{RGBValues[0]}, {RGBValues[1]}, {RGBValues[2]}");
+                Clipboard.SetText($"{RGBValues[0]}, {RGBValues[1]}, {RGBValues[2]}");
 
                 SetInfoMessage("copy", $"{RGBValues[0]}, {RGBValues[1]}, {RGBValues[2]}");
             }
@@ -195,7 +208,7 @@ namespace StarHue
         {
             if (RGBValues[0].HasValue)
             {
-                System.Windows.Clipboard.SetText(RGBValues[0].ToString());
+                Clipboard.SetText(RGBValues[0].ToString());
 
                 SetInfoMessage("copy", $"{RGBValues[0]}");
             }
@@ -209,7 +222,7 @@ namespace StarHue
         {
             if (RGBValues[1].HasValue)
             {
-                System.Windows.Clipboard.SetText(RGBValues[1].ToString());
+                Clipboard.SetText(RGBValues[1].ToString());
 
                 SetInfoMessage("copy", $"{RGBValues[1]}");
 
@@ -224,7 +237,7 @@ namespace StarHue
         {
             if (RGBValues[2].HasValue)
             {
-                System.Windows.Clipboard.SetText(RGBValues[2].ToString());
+                Clipboard.SetText(RGBValues[2].ToString());
 
                 SetInfoMessage("copy", $"{RGBValues[2]}");
             }
@@ -238,7 +251,7 @@ namespace StarHue
         {
             if (HEXValue != "")
             {
-                System.Windows.Clipboard.SetText(HEXValue);
+                Clipboard.SetText(HEXValue);
 
                 SetInfoMessage("copy", $"{HEXValue}");
             }
@@ -248,12 +261,93 @@ namespace StarHue
             }
         }
 
-        private void InfoMessage_Click(object sender, RoutedEventArgs e)
+        private void SaveColorButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (HEXValue == "")
+            {
+                SetInfoMessage("noCopy");
+                return;
+            }
+
+            // Only load colors from CSV after the first export click, to avoid unnecessary loading during app startup
+
+            if (colors.Count == 0)
+            {
+                try
+                {
+                    colors = ColorNamer.LoadColorsFromCsv(@"values\colornames.csv");
+                }
+                catch
+                {
+                    // Do nothing, defaults to empty dictionary
+                }
+            }
+
+            string colorName = "";
+            string inputHex = $"#{HEXValue}";
+
+            try
+            {
+                colorName = ColorNamer.FindClosestColorName(inputHex, colors);
+            }
+            catch
+            {
+                // Do nothing, defaults to empty
+            }
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = "HTML files (*.html)|*.html",
+                DefaultExt = ".html",
+                FileName = $"{(string.IsNullOrEmpty(colorName) ? "" : colorName + " ")}{inputHex}.html"
+            };
+
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                savedColorFilePath = saveFileDialog.FileName;
+
+                ColorExporter.ExportToHTML(inputHex, savedColorFilePath);
+                isColorSaved = true;
+                OpenSavedColorContextMenuButton.Visibility = Visibility.Visible;
+                SaveColorContextMenuButton.Header = "Save color again";
+                SetInfoMessage("colorSaved");
+            }
+            else
+            {
+                SetInfoMessage("colorNotSaved");
+            }
+        }
+
+        private void OpenSavedColorButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (isColorSaved)
+            {
+                try
+                {
+                    System.Diagnostics.Process.Start(savedColorFilePath);
+                }
+                catch
+                {
+                    // Handle case where the file path is invalid or the file doesn't exist
+                    // Sets the context menu to default mode
+                    SetInfoMessage("colorNotSaved");
+                    SaveColorContextMenuButton.Header = "Save color";
+                    OpenSavedColorContextMenuButton.Visibility = Visibility.Collapsed;
+                }
+            }
+        }
+
+        private void AppIcon_Click(object sender, RoutedEventArgs e)
         {
             if (InfoMessageLabel.Content.ToString() == $"{appName}")
                 SetInfoMessage("copyrightMessage");
-            else if (InfoMessageLabel.Content.ToString() == $"{appName} v{appVersion} (c) {appDeveloper}")
+            else if (InfoMessageLabel.Content.ToString() == $"v{appVersion} © {appDeveloper}")
                 SetInfoMessage();
+        }
+
+        private void InfoMessage_Click(object sender, RoutedEventArgs e)
+        {
         }
 
 
@@ -274,7 +368,13 @@ namespace StarHue
                     InfoMessageLabel.Content = message;
                     break;
                 case "copyrightMessage":
-                    InfoMessageLabel.Content = $"{appName} v{appVersion} (c) {appDeveloper}";
+                    InfoMessageLabel.Content = $"v{appVersion} © {appDeveloper}";
+                    break;
+                case "colorSaved":
+                    InfoMessageLabel.Content = $"Color saved!";
+                    break;
+                case "colorNotSaved":
+                    InfoMessageLabel.Content = $"Color not saved!";
                     break;
                 default:
                     InfoMessageLabel.Content = $"{appName}";

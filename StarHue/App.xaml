@@ -7,9 +7,15 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/CloseButton.xaml"/>
+                <ResourceDictionary Source="Resources/MinimizeButton.xaml"/>
                 <ResourceDictionary Source="Resources/CopyButton.xaml"/>
                 <ResourceDictionary Source="Resources/ColorPickButton.xaml"/>
+                <ResourceDictionary Source="Resources/SaveColorButton.xaml"/>
+                <ResourceDictionary Source="Resources/OpenSavedColorButton.xaml"/>
                 <ResourceDictionary Source="Resources/HyperlinkStyles.xaml"/>
+                <ResourceDictionary Source="Resources/ContextMenuStyles.xaml"/>
+                <ResourceDictionary Source="Resources/OpenIcon.xaml"/>
+                <ResourceDictionary Source="Resources/SaveIcon.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
