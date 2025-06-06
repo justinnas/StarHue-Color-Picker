@@ -39,8 +39,8 @@ namespace StarHue
     <style>
         body{{background:#101010;color:#fff;font-family:Arial,sans-serif;display:flex;justify-content:center;align-items:center;min-height:100vh;margin:0;text-align:center}}
         .container{{display:flex;flex-direction:column;align-items:center;margin:30px 0}}
-        .color-block{{background:{hexColor};width:150px;height:150px;border-radius:2px;border:1px solid #505050}}
-        .color-values{{display:grid;gap:10px;border-radius:15px;background:#141414;padding:1em;border:1px solid #505050;margin:20px 0 20px}}
+        .color-block{{background:{hexColor};width:150px;height:150px;border-radius:4px;border:1px solid #505050}}
+        .color-values{{display:grid;gap:10px;border-radius:8px;background:#141414;padding:1em;border:1px solid #505050;margin:20px 0 20px}}
         .value-line{{display:flex;align-items:center;height:1.5em;padding:0 1em}}
         .value-title{{font-weight:bold;margin-right:1em;width:3em;text-align:left;color:#909090}}
         .footer{{color:#707070;font-size:small}}
@@ -60,7 +60,7 @@ namespace StarHue
             <div class=""value-line""><span class=""value-title"">HSV</span>{hsvColorString}</div>
         </div>
         <div class=""footer"">
-            <a href=""https://github.com/justinnas/StarHue-Color-Picker"" target=""_blank""><strong>{MainWindow.appName} {MainWindow.appVersion}</strong> © {MainWindow.appDeveloper}</a>
+            <a href=""https://github.com/justinnas/StarHue-Color-Picker"" target=""_blank""><strong>{MainWindow.appName} v{MainWindow.appVersion}</strong> © {MainWindow.appDeveloper}</a>
         </div>
     </div>
 </body>
