@@ -117,9 +117,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="SaveFunctions\ColorConverter.cs" />
-    <Compile Include="SaveFunctions\ColorExporter.cs" />
-    <Compile Include="SaveFunctions\ColorNamer.cs" />
+    <Compile Include="ColorSaveFunctions\ColorConverter.cs" />
+    <Compile Include="ColorSaveFunctions\ColorExporter.cs" />
+    <Compile Include="ColorSaveFunctions\ColorNamer.cs" />
     <Compile Include="CursorFollower.xaml.cs">
       <DependentUpon>CursorFollower.xaml</DependentUpon>
     </Compile>
@@ -150,14 +150,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources\OpenSavedColorButton.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Resources\SaveColorButton.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Resources\HyperlinkStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -185,6 +177,15 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Content Include="licenses\Meodai_Color-Names_License.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="licenses\StarHue_License.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="licenses\System.Drawing_License.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="values\colornames.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

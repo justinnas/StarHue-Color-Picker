@@ -10,8 +10,6 @@
                 <ResourceDictionary Source="Resources/MinimizeButton.xaml"/>
                 <ResourceDictionary Source="Resources/CopyButton.xaml"/>
                 <ResourceDictionary Source="Resources/ColorPickButton.xaml"/>
-                <ResourceDictionary Source="Resources/SaveColorButton.xaml"/>
-                <ResourceDictionary Source="Resources/OpenSavedColorButton.xaml"/>
                 <ResourceDictionary Source="Resources/HyperlinkStyles.xaml"/>
                 <ResourceDictionary Source="Resources/ContextMenuStyles.xaml"/>
                 <ResourceDictionary Source="Resources/OpenIcon.xaml"/>

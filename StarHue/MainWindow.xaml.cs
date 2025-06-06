@@ -17,7 +17,7 @@ namespace StarHue
     public partial class MainWindow : Window
     {
         public const string appName = "StarHue";
-        public const string appVersion = "2.0pre1";
+        public const string appVersion = "2.0";
         public const string appDeveloper = "justinnas";
 
         private DispatcherTimer CursorTrackTimer;
