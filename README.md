@@ -20,10 +20,7 @@ You can download the latest version of StarHue from [GitHub Releases](https://g
 <br>
 
 ## Screenshots
-<div display="flex" align-items="center" >
-  <img src="https://github.com/user-attachments/assets/0fe7d5ad-3f48-4200-9e8f-512d3440b999" height="200">
-  <img src="https://github.com/user-attachments/assets/a70e15df-c825-407d-ac84-5898fc7e241c" height="200">
-</div>
+Coming soon!
 
 <br>
 
@@ -50,9 +47,15 @@ If you allow the installer to create a Start Menu folder during installation, yo
 1. Click the copy icon next to the HEX title to copy the value in the format *#FFFFFF*.
 2. Click on the HEX value itself to copy the value without the hashtag (*FFFFFF*).
 
-<br>
+### How to Save a Color:
+(This is a new feature introduced in StarHue v2.0)
+1. Pick a color.
+2. Right-click with your mouse on the color square.
+3. Click “Save color”.
+4. Choose your desired save location.
+5. If you want to view the saved color file, right-click the square again and click “Open saved color”.
 
-*The last thing that was copied will also be displayed at the bottom of the application window.*
+<br>
 
 *You can also run multiple instances of this program to have more colors picked at the same time.*
 
