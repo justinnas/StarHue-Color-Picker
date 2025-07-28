@@ -4,63 +4,80 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Height="220" Width="300"
+        Height="230" Width="340"
         WindowStyle="None"
         ResizeMode="NoResize"
         Title="StarHue Color Picker" 
         Background="Transparent"
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen">
-
-    <Border Background="#E5000000" CornerRadius="15" BorderBrush="#FF3A3A3A" BorderThickness="1">
+    <Border x:Name="MainBorderWindow" Background="#F7212121" CornerRadius="8" BorderBrush="#FF404040" BorderThickness="1" Height="190" Width="300">
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="20" RenderingBias ="Performance" ShadowDepth ="4" Color ="Black" Opacity="0.7" />
+        </Border.Effect>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="40"/>
                 <ColumnDefinition Width="110"/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="108"/>
                 <ColumnDefinition Width="40"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
                 <RowDefinition/>
-                <RowDefinition Height="40"/>
+                <RowDefinition Height="25"/>
             </Grid.RowDefinitions>
 
             <Label x:Name="RGBTitle"
-                FontSize="15" Content="RGB" Foreground="White" FontWeight="Bold" Height="30" Grid.Row="1" Grid.Column="1" Margin="0,4,0,106" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0,5,0,0" />
-            <TextBlock x:Name="RGBValuesBlock" FontSize="15" Foreground="White" Grid.Row="1" Grid.Column="1" Margin="0,31,0,87" HorizontalAlignment="Center" Width="110">
+                FontSize="15" Content="RGB" Foreground="White" FontWeight="Bold" Height="22" Grid.Row="1" Grid.Column="1" Margin="0,14,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,0,0,0" Width="30" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock x:Name="RGBValuesBlock" FontSize="15" Foreground="White" Grid.Row="1" Grid.Column="1" Margin="0,36,0,67" HorizontalAlignment="Center" Width="110">
                 <TextBlock.Inlines>
-                    <Hyperlink x:Name="RedHyperlink" Click="RGBRed_Click">
-                        <Run Text="255"/>
-                    </Hyperlink><Run Text="," />
-                    <Hyperlink x:Name="GreenHyperlink" Click="RGBGreen_Click">
-                        <Run Text="255" />
-                    </Hyperlink><Run Text="," />
-                    <Hyperlink x:Name="BlueHyperlink" Click="RGBBlue_Click">
-                        <Run Text="255" />
-                    </Hyperlink>
+                    <Hyperlink x:Name="RedHyperlink" Click="RGBRed_Click"><Run Text="255"/></Hyperlink><Run Text="," />
+                    <Hyperlink x:Name="GreenHyperlink" Click="RGBGreen_Click"><Run Text="255" /></Hyperlink><Run Text="," />
+                    <Hyperlink x:Name="BlueHyperlink" Click="RGBBlue_Click"><Run Text="255" /></Hyperlink>
                 </TextBlock.Inlines>
             </TextBlock>
-            <Button Name="RGBValueCopyButton" Width="20" Height="20" HorizontalAlignment="Left" VerticalAlignment="Top" Click="CopyRGBButton_Click" Style="{StaticResource CopyButtonStyle}" Margin="37,9,0,0" Grid.Row="1" Grid.Column="1" RenderTransformOrigin="0.475,0.725"/>
+            <Button Name="RGBValueCopyButton" Width="20" Height="20" HorizontalAlignment="Left" VerticalAlignment="Top" Click="CopyRGBButton_Click" Style="{StaticResource CopyButtonStyle}" Margin="35,15,0,0" Grid.Row="1" Grid.Column="1" RenderTransformOrigin="0.475,0.725"/>
             <Label x:Name="HEXTitle" 
-                 FontSize="15" Content="HEX" Foreground="White" Height="30" FontWeight="Bold" Grid.Row="1" Grid.Column="1" Margin="0,68,76,42" Padding="0,5,0,5"/>
+                 FontSize="15" Content="HEX" Foreground="White" FontWeight="Bold" Grid.Row="1" Grid.Column="1" Padding="0,0,0,0" Height="20" Width="30" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,78,0,0"/>
             <TextBlock x:Name="HEXValues"
-                 FontSize="15" Foreground="White" Grid.Row="1" Grid.Column="1" Margin="1,96,109,21" Grid.ColumnSpan="2">
+                 FontSize="15" Foreground="White" Grid.Row="1" Grid.Column="1" Margin="0,100,0,3" Height="20"
+                       >
                 <TextBlock.Inlines>
-                    <Run Text="#"/><Hyperlink x:Name="HEXValueHyperlink" Click="HEXValue_Click">
-                        <Run Text="FFFFFF"/>
-                    </Hyperlink>
+                    <Run Text="#"/><Hyperlink x:Name="HEXValueHyperlink" Click="HEXValue_Click"><Run Text="FFFFFF"/></Hyperlink>
                 </TextBlock.Inlines>
             </TextBlock>
-            <Button Name="HEXValueCopyButton" Width="20" Height="20" HorizontalAlignment="Left" VerticalAlignment="Top" Click="CopyHEXButton_Click" Style="{StaticResource CopyButtonStyle}" Margin="37,74,0,0" Grid.Row="1" Grid.Column="1"/>
+            <Button Name="HEXValueCopyButton" Width="20" Height="20" HorizontalAlignment="Left" VerticalAlignment="Top" Click="CopyHEXButton_Click" Style="{StaticResource CopyButtonStyle}" Margin="35,79,0,0" Grid.Row="1" Grid.Column="1"/>
 
-            <Rectangle Name="ColorDisplay" Fill="White" Grid.Column="2" Grid.Row="1" Height="64" Width="64" Stroke="White" Margin="31,10,13,64"/>
-            <Button Name="PickColorButton" Style="{StaticResource PickColorButtonStyle}" Grid.Column="2" Grid.Row="1" Click="PickColorButton_Click" Margin="18,89,0,22" VerticalAlignment="Center"/>
+            <Border Name="ColorDisplay" Background="White" Grid.Column="2" Grid.Row="1" Margin="31,18,13,39" BorderBrush="#FF404040" BorderThickness="1,1,1,1" CornerRadius="4,4,4,4">
+                <Border.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem x:Name="SaveColorContextMenuButton" Header="Save color" Click="SaveColorButton_Click">
+                            <MenuItem.Icon>
+                                <Viewbox Width="12" Height="12">
+                                    <Path Fill="White" Data="{StaticResource SaveIconPath}" Stretch="Uniform" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </Viewbox>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem x:Name="OpenSavedColorContextMenuButton" Header="Open saved color" Click="OpenSavedColorButton_Click" Visibility="Collapsed">
+                            <MenuItem.Icon>
+                                <Viewbox Width="12" Height="12">
+                                    <Path Fill="White" Data="{StaticResource OpenIconPath}" Stretch="Uniform" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </Viewbox>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </ContextMenu>
+                </Border.ContextMenu>
+            </Border>
+            <Button Name="PickColorButton" Style="{StaticResource PickColorButtonStyle}" Grid.Column="2" Grid.Row="1" Click="PickColorButton_Click" Margin="18,94,0,0" VerticalAlignment="Top" Height="26"/>
 
             <Button Name="CloseButton" Width="20" Height="20" HorizontalAlignment="Left" VerticalAlignment="Top" Click="CloseButton_Click" Grid.Column="3"
-        Style="{StaticResource CloseButtonStyle}" Margin="0,20,0,0"/>
+        Style="{StaticResource CloseButtonStyle}" Margin="0,18,0,0"/>
+            <Button Name="MinimizeButton" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" Click="MinimizeButton_Click" Grid.Column="2"
+        Style="{StaticResource MinimizeButtonStyle}" Margin="88,18,0,0"/>
 
-            <Label x:Name="InfoMessageLabel" HorizontalContentAlignment="Center" Grid.Column="1" Foreground="LightGray" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Top" Width="220" Grid.ColumnSpan="2" Content="StarHue" Margin="0,137,0,0" Grid.RowSpan="2" FontSize="11" MouseLeftButtonDown="InfoMessage_Click" />
+            <Label x:Name="InfoMessageLabel" Content="StarHue" HorizontalAlignment="Left" MouseLeftButtonDown="InfoMessage_Click" VerticalAlignment="Top" Margin="0,15,0,0" Foreground="White" Height="26" Width="164" FontWeight="Bold" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+            <Image Source="/starhue_logo.ico" Margin="20,17,0,1" Width="20" MouseLeftButtonDown="AppIcon_Click"/>
         </Grid>
     </Border>
 </Window>

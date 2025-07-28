@@ -5,16 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StarHue"
         mc:Ignorable="d"
-        Background="#01000000"
         WindowStyle = "None"
-        Width = "200"
-        Height = "200"
+        Width = "500"
+        Height = "500"
         ResizeMode = "NoResize"
         AllowsTransparency = "true"
         ShowInTaskbar = "false"
         Topmost = "true"
         Title="Picking a color...">
+    <Window.Background>
+        <RadialGradientBrush>
+            <GradientStop Color="#01000000"/>
+            <GradientStop Color="Transparent" Offset="1"/>
+        </RadialGradientBrush>
+    </Window.Background>
     <Grid>
-        <Border Name="MiniColorDisplay" HorizontalAlignment="Left" Width="16" Height="16" Margin="110,110,0,0" Background="White" VerticalAlignment="Top" BorderBrush="#FF7F7F7F" BorderThickness="1" CornerRadius="3,3,3,3"/>
+        <Border Name="MiniColorDisplay" HorizontalAlignment="Left" Width="16" Height="16" Margin="260,260,0,0" Background="White" VerticalAlignment="Top" BorderBrush="#FF7F7F7F" BorderThickness="1" CornerRadius="3,3,3,3"/>
     </Grid>
 </Window>
