@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/b1878cd4-4d7d-4387-beb6-4b0bc24ba150" alt="StarTray" height="200">
+  <img src="https://github.com/user-attachments/assets/b1878cd4-4d7d-4387-beb6-4b0bc24ba150" alt="Starhue" height="200">
 </div>
 
 
@@ -13,18 +13,28 @@
 
 <br>
 
-## **Download**
-
-You can download the latest version of StarHue from [GitHub Releases](https://github.com/justinnas/StarHue-Color-Picker/releases/). Scroll down to 'Assets' section and choose between the installer or the portable version based on your preference.
-
-After downloading the application, double-click the .exe file to begin installation.<br/><br/>
-In some cases, you may see a "Windows protected your PC" warning. This appears because the application is new and not yet recognized by Microsoft. To proceed: Click "More info" and then click "Run anyway".
-<br/><br/>Once past the warning, follow the on-screen instructions in the setup wizard to complete the installation.
+<div align="center" style="border-radius: 10px">
+  <img src="https://github.com/user-attachments/assets/fc065fcf-2dbf-4e0e-8f5e-f1f6fc811447" alt="Starhue V2 Demo" height="400">
+</div>
 
 <br>
 
-## Screenshots
-Coming soon!
+## **Download**
+
+<div>
+  <a href="https://github.com/justinnas/StarHue-Color-Picker/releases/download/v2.0/StarHue-v2.0-Setup.exe">
+    <img src="https://github.com/user-attachments/assets/9bdc6abd-a08f-4e76-be75-961d9e2b22a7" height="70" alt="GetStarhue"/>
+  </a>
+</div>
+<br><br>
+
+You can also download the latest version of StarHue installer or portable edition from [GitHub Releases](https://github.com/justinnas/StarHue-Color-Picker/releases/).<br>
+Scroll down to 'Assets' section and choose between the installer or the portable version based on your preference.
+
+After downloading the application, double-click the .exe file to begin installation.<br/><br/>
+*In some cases, you may see a "Windows protected your PC" warning. This appears because the application is new and not yet recognized by Microsoft. To proceed: Click "More info" and then click "Run anyway".
+<br/>Once past the warning, follow the on-screen instructions in the setup wizard to complete the installation.*
+
 
 <br>
 
@@ -67,7 +77,7 @@ If you allow the installer to create a Start Menu folder during installation, yo
 ## **Source Code**
 
 The application is developed in C# using the .NET Framework 4.8. If you prefer, you're welcome to review the source code and compile the application yourself.<br/><br/>
-The setup wizard is made using [InnoSetup](https://jrsoftware.org/isinfo.php).
+The setup wizard was made using [InnoSetup](https://jrsoftware.org/isinfo.php).
 
 <br>
 
